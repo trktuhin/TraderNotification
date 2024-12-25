@@ -13,7 +13,8 @@ function checkForChanges() {
     // read previous order count
     const storedCount = localStorage.getItem('orderCount');
 
-    console.log("Previous:" + storedCount + " Latest:" + orderCount);
+    const resultMessage = "Previous:" + storedCount + " Latest:" + orderCount;
+    chrome.runtime.sendMessage({ action: 'checkResult', result: resultMessage });
 
     if (orderCount !== storedCount) {
         chrome.runtime.sendMessage({ action: 'playNotification' });

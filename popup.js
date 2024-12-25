@@ -7,6 +7,9 @@ const monitorSwitch = document.getElementById("monitorSwitch");
 chrome.runtime.onMessage.addListener((message) => {
     if (message.action === 'playNotification') {
         playNotification();
+    } else if (message.action === 'checkResult') {
+        logCurrentTime();
+        console.log(message.result);
     }
 });
 
@@ -33,8 +36,8 @@ function playNotification() {
 function startMonitoring(tabId) {
     if (!intervalId) {
         intervalId = setInterval(() => {
-            console.log("Current phase:", phase);
-            logCurrentTime();
+            // console.log("Current phase:", phase);
+            // logCurrentTime();
             if (phase === 6) {
                 phase = 1;
                 chrome.tabs.reload(Number(tabId));
